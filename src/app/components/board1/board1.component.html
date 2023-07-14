@@ -1,0 +1,13 @@
+<div class="tools">
+  <div class="itols" draggable="true" *ngFor="let x of tools">Column {{x.cols}}</div>
+</div>
+
+<div class="board" [class.dragging]="isDragActive"
+(dragstart)="onDragstart($event)"
+(dragover)="onDragOver($event)" 
+(dragenter)="onDragenter($event)" 
+(drop)="onDrop($event)"
+(dragend)="onDragend($event)"
+(dragleave)="onDragleave($event)">
+
+</div>

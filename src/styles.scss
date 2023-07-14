@@ -1,1 +1,27 @@
-/* You can add global styles to this file, and also import other style files */
+
+html, body {
+  font-family: sans-serif;
+  padding: 0;
+  margin: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.board {
+  width: calc(100% - 250px);
+  background: #e1e1e6;
+  padding:10px;
+  height: 100vh;
+}
+
+.tools {
+  width: 250px;
+  background: #e9ebea;
+  padding:10px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100vh;
+}
