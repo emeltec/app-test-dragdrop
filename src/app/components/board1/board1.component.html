@@ -1,6 +1,6 @@
 <div class="tools">
   <div class="item-tools" *ngFor="let item of tools" draggable="true" 
-  (dragstart)="onDragstart($event, item)" (dragend)="onDragend($event)" 
+  (dragstart)="onDragstart($event)" (dragend)="onDragend($event)" 
   [attr.id]="item.id" [attr.data-item]="getAttrib(item)"
   >Col {{item.cols}}</div>
 </div>

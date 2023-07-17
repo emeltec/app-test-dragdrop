@@ -38,16 +38,51 @@ export class Board1Component implements OnInit {
     console.log(e)
   }
 
-  onDragstart(e: any, data:any) {
+  onDragstart(e: any) {
     // e.preventDefault();
     // e.stopPropagation();
-    console.log(e.target.attributes['data-item'].value)
+    let data = e.target.attributes['data-item'].value
     e.dataTransfer.setData("text/plain", e.target.id);
-    e.dataTransfer.setData("data", JSON.stringify(data));
+    e.dataTransfer.setData("data", data);
 
     console.log('START', e.target.attributes)
     // let c = JSON.parse(e.target.attributes.txt.value)
   }
+
+  
+
+  onDrop(e: any) {
+    e.preventDefault();
+    e.stopPropagation();
+    this.isDragActive = false;
+    const id = e.dataTransfer.getData('text/plain');
+    
+    const data:any = JSON.parse(e.dataTransfer.getData('data'));
+    console.log(id)
+    const draggable:any = document.getElementById(id);
+    // console.log(data)
+    
+    let isCopy = draggable.getAttribute('data-iscopy');
+    console.log(isCopy)
+
+    if(isCopy != 'true') {
+      let clone = draggable.cloneNode(true);
+      clone.setAttribute('data-iscopy', 'true')
+      clone.id = UID();
+      clone.setAttribute('class', data.css);
+      clone.addEventListener('dragstart', this.onDragstart);
+      e.target.appendChild(clone);
+    } else {
+      e.target.appendChild(draggable);
+    }
+    
+
+
+    // e.target.appendChild(draggable);
+
+  }
+
+
 
   onDrag(e: any) {
     e.preventDefault();
@@ -62,26 +97,6 @@ export class Board1Component implements OnInit {
     this.isDragActive = true;
     e.dataTransfer.clearData();
     e.dataTransfer.setData("text/plain", e.target.id);
-  }
-
-  onDrop(e: any) {
-    e.preventDefault();
-    e.stopPropagation();
-    this.isDragActive = false;
-    const id = e.dataTransfer.getData('text/plain');
-    const data:any = JSON.parse(e.dataTransfer.getData('data'));
-    const draggable:any = document.getElementById(id);
-    console.log(data)
-
-    let clone = draggable.cloneNode(true);
-    clone.setAttribute('class', data.css);
-    clone.addEventListener('dragstart', function(event:Event){});
-    // clone.addEventListener('dragstart', dragStart);
-    e.target.appendChild(clone);
-
-
-    // e.target.appendChild(draggable);
-
   }
 
 
