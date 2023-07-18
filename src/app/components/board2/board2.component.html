@@ -1,0 +1,15 @@
+<div class="tools">
+  <div class="item-tools" *ngFor="let item of tools" draggable="true" 
+  (dragstart)="onDragstart($event)" (dragend)="onDragend($event)" 
+  [attr.id]="item.id" [attr.data-item]="getAttrib(item)"
+  >Col {{item.cols}}</div>
+</div>
+
+<div class="panel">
+  <div id="rowFlow" class="row-flow" [class.dragging]="isDragActive"
+  (dragover)="onDragOver($event)" 
+  (dragenter)="onDragenter($event)" 
+  (drop)="onDrop($event)"
+  (dragleave)="onDragleave($event)">
+</div>
+</div>

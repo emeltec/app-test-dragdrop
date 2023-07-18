@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UID } from 'src/app/functions/uid';
+var Sortable = require('../../../assets/js/sortable.js')
 
 @Component({
   selector: 'app-board1',
@@ -44,6 +45,7 @@ export class Board1Component implements OnInit {
     let data = e.target.attributes['data-item'].value
     e.dataTransfer.setData("text/plain", e.target.id);
     e.dataTransfer.setData("data", data);
+    e.dataTransfer.effectAllowed = "move";
 
     console.log('START', e.target.attributes)
     // let c = JSON.parse(e.target.attributes.txt.value)

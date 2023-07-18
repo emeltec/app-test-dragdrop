@@ -1,0 +1,29 @@
+.item-tools {
+
+  padding: 6px 6px;
+    background: #fff;
+    border: 1px solid #e6e5e5;
+    margin: 4px 0px;
+    border-radius: 3px;
+    display: flex;
+    gap: 3px;
+    color: #565657;
+    cursor: move;
+}
+
+.dragging {
+  border: 1px dashed red;
+}
+
+.row-flow {
+  display: flex;
+  flex-wrap: wrap;
+  place-content: flex-start;
+  min-height: 400px;
+}
+
+.col {
+  height: fit-content;
+  border: solid 1px #cccccc;
+  border-radius: 4px;
+}
