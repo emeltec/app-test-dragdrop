@@ -1,0 +1,23 @@
+template {
+  display: none;
+}
+
+.content {
+  background-color: lightgrey;
+  padding: 5px;
+  margin: 5px 0px;
+}
+
+.container {
+  padding-right: 35px;
+  border: 2px solid black;
+  min-height: 30px;
+}
+
+.container-item {
+  padding: 1px;
+}
+
+.container-item-without-padding {
+  padding: 0px;
+}
