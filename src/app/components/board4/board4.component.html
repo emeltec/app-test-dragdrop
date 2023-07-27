@@ -1,0 +1,25 @@
+<div class="container reports">
+  <span>Nested Sorted simulated</span>
+  <div class="row users">
+    <div class="col-12 user" *ngFor="let user of UsersData">
+      {{user.name}}
+      <div class="row telfs">
+        <div class="col tel" *ngFor="let tel of user.telfs">{{tel.num}}</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="mt-3"></div>
+
+<div class="container reports3">
+  <span>Nested Sorted</span>
+  <div class="row users row-sort">
+    <div class="col-12 user" *ngFor="let user of UsersData">
+      {{user.name}}
+      <div class="row telfs row-sort">
+        <div class="col tel" *ngFor="let tel of user.telfs">{{tel.num}}</div>
+      </div>
+    </div>
+  </div>
+</div>
