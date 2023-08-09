@@ -14,7 +14,7 @@ export class Board4Component implements OnInit {
       telfs: [
         { tid: 1, des: 'Principal', num: '12545' },
         { tid: 2, des: 'Trabajo', num: '66666' },
-        { tid: 2, des: 'Casa', num: '9789797' },
+        { tid: 3, des: 'Casa', num: '9789797' },
       ]
     },
     {
@@ -22,7 +22,7 @@ export class Board4Component implements OnInit {
       telfs: [
         { tid: 1, des: 'Principal', num: '33333' },
         { tid: 2, des: 'Trabajo', num: '77777' },
-        { tid: 2, des: 'Casa', num: '57585' },
+        { tid: 3, des: 'Casa', num: '57585' },
       ]
     },
     {
@@ -30,7 +30,7 @@ export class Board4Component implements OnInit {
       telfs: [
         { tid: 1, des: 'Principal', num: '44444' },
         { tid: 2, des: 'Trabajo', num: '88888' },
-        { tid: 2, des: 'Casa', num: '33232' },
+        { tid: 3, des: 'Casa', num: '33232' },
       ]
     },
   ]
@@ -42,9 +42,9 @@ export class Board4Component implements OnInit {
 
   ngAfterViewInit() {
     const dragItems: any = document.querySelector('.reports .users');
-    Sortable.create(dragItems, {
+    new Sortable(dragItems, {
       group: 'shared',
-      animation: 150,
+      animation: 250,
       ghostClass: 'sortable-ghost',
       actionOne: this.reorderData.bind(this),
       onEnd: function (e: any) {
@@ -59,13 +59,21 @@ export class Board4Component implements OnInit {
     for (let i = 0; i < dragItems2.length; i++) {
       new Sortable(dragItems2[i], {
         group: {
-          name: "nested2",
-          pull: false,
-          put: true,
+          name: "shared2",
+          pull: true,
+          put: false,
         },
         animation: 250,
-        forceFallback: true
-
+        forceFallback: true,
+        filter:'.ignore',
+        store: {
+          set: function (data: any) {
+            console.log(data.toArray())
+          }
+        },
+        onEnd: function (e: any) {
+          console.log(this);
+        },
       });
     }
 
@@ -75,7 +83,7 @@ export class Board4Component implements OnInit {
         group: {
           name: "nested3",
           pull: false,
-          put: true,
+          put: false,
         },
         animation: 250,
         forceFallback: true
@@ -95,6 +103,22 @@ export class Board4Component implements OnInit {
       user.order = index + 1;
     });
     // this.store.users$.next(this.UsersData)
+  }
+
+  activeFilter() {
+    const dragItems2: any = document.querySelectorAll('.telfs .tel');
+    console.log(dragItems2)
+    for (let i = 0; i < dragItems2.length; i++) {
+      dragItems2[i].classList.add('ignore')
+    }
+  }
+
+  removeFilter(){
+    const dragItems2: any = document.querySelectorAll('.telfs .tel');
+    console.log(dragItems2)
+    for (let i = 0; i < dragItems2.length; i++) {
+      dragItems2[i].classList.remove('ignore')
+    }
   }
 
 }
