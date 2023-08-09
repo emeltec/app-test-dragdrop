@@ -2,6 +2,7 @@
   <span>Nested Sorted simulated</span>
   <button (click)="activeFilter()">Disable Drag & Drop</button>
   <button (click)="removeFilter()">Enable Drag & Drop</button>
+  <button (click)="enableOrDisable()">{{labelButton}}</button>
   <div class="row users">
     <div class="col-12 user" *ngFor="let user of UsersData">
       {{user.name}}

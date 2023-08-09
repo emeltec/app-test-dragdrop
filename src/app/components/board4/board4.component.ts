@@ -35,6 +35,9 @@ export class Board4Component implements OnInit {
     },
   ]
 
+  sortableJs: any[] = [];
+  labelButton: string = 'disable';
+
   constructor() { }
 
   ngOnInit() {
@@ -57,7 +60,7 @@ export class Board4Component implements OnInit {
 
     const dragItems2: any = document.querySelectorAll('.reports .telfs');
     for (let i = 0; i < dragItems2.length; i++) {
-      new Sortable(dragItems2[i], {
+      this.sortableJs[i] = new Sortable.create(dragItems2[i], {
         group: {
           name: "shared2",
           pull: true,
@@ -119,6 +122,20 @@ export class Board4Component implements OnInit {
     for (let i = 0; i < dragItems2.length; i++) {
       dragItems2[i].classList.remove('ignore')
     }
+  }
+
+  enableOrDisable() {
+    // let state = this.sortableJs.option("disabled");
+    // this.sortableJs.option("disabled", !state);
+    let state = this.sortableJs[0].option("disabled");
+    this.labelButton = state ? 'disable' : 'enable';
+    
+    this.sortableJs.forEach(item => {
+      let state = item.option("disabled")
+      item.option("disabled", !state)
+    })
+
+    
   }
 
 }
