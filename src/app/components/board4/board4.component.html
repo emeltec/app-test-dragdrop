@@ -1,8 +1,10 @@
 <div class="container reports">
   <span>Nested Sorted simulated</span>
+  <button (click)="initSortable()">Init sortable</button>
+  <button (click)="destroySortable()">Destroy sortable</button>
   <button (click)="activeFilter()">Disable Drag & Drop</button>
   <button (click)="removeFilter()">Enable Drag & Drop</button>
-  <button (click)="enableOrDisable()">{{labelButton}}</button>
+  <button (click)="enableOrDisable()">{{labelButton}} sort</button>
   <div class="row users">
     <div class="col-12 user" *ngFor="let user of UsersData">
       {{user.name}}

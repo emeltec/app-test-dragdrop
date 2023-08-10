@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { StoreService } from 'src/app/services/store.service';
 var Sortable = require('../../../assets/js/sortable.js')
 
 @Component({
@@ -35,17 +36,26 @@ export class Board4Component implements OnInit {
     },
   ]
 
-  sortableJs: any[] = [];
-  labelButton: string = 'disable';
+  sortableChild: any[] = [];
+  sortableParent: any = {};
+  labelButton: string = 'Disable';
 
-  constructor() { }
+  sortInitialized = false;
+
+  constructor(
+    private store:StoreService
+  ) { }
 
   ngOnInit() {
   }
 
   ngAfterViewInit() {
+    this.initSortable();
+  }
+
+  initSortable(){
     const dragItems: any = document.querySelector('.reports .users');
-    new Sortable(dragItems, {
+    this.sortableParent = new Sortable.create(dragItems, {
       group: 'shared',
       animation: 250,
       ghostClass: 'sortable-ghost',
@@ -60,7 +70,7 @@ export class Board4Component implements OnInit {
 
     const dragItems2: any = document.querySelectorAll('.reports .telfs');
     for (let i = 0; i < dragItems2.length; i++) {
-      this.sortableJs[i] = new Sortable.create(dragItems2[i], {
+      this.sortableChild[i] = new Sortable.create(dragItems2[i], {
         group: {
           name: "shared2",
           pull: true,
@@ -94,6 +104,7 @@ export class Board4Component implements OnInit {
     }
   }
 
+
   reorderData(oldIndex: any, newIndex: any) {
     const draggUser = this.UsersData[oldIndex];
     this.UsersData.splice(oldIndex, 1);
@@ -110,7 +121,6 @@ export class Board4Component implements OnInit {
 
   activeFilter() {
     const dragItems2: any = document.querySelectorAll('.telfs .tel');
-    console.log(dragItems2)
     for (let i = 0; i < dragItems2.length; i++) {
       dragItems2[i].classList.add('ignore')
     }
@@ -118,7 +128,6 @@ export class Board4Component implements OnInit {
 
   removeFilter(){
     const dragItems2: any = document.querySelectorAll('.telfs .tel');
-    console.log(dragItems2)
     for (let i = 0; i < dragItems2.length; i++) {
       dragItems2[i].classList.remove('ignore')
     }
@@ -127,15 +136,23 @@ export class Board4Component implements OnInit {
   enableOrDisable() {
     // let state = this.sortableJs.option("disabled");
     // this.sortableJs.option("disabled", !state);
-    let state = this.sortableJs[0].option("disabled");
-    this.labelButton = state ? 'disable' : 'enable';
-    
-    this.sortableJs.forEach(item => {
+    let state = this.sortableChild[0].option("disabled");
+    this.labelButton = state ? 'Disable' : 'Enable';
+
+    this.sortableChild.forEach(item => {
       let state = item.option("disabled")
       item.option("disabled", !state)
     })
 
-    
+    let state2 = this.sortableParent.option("disabled");
+    this.sortableParent.option("disabled", !state2);
+  }
+
+  destroySortable() {
+    this.sortableChild.forEach(item => {
+      item.destroy();
+    })
+    this.sortableParent.destroy();
   }
 
 }
