@@ -1,0 +1,8 @@
+<div class="col-12 user">
+  {{user.name}}
+  <div class="row telfs">
+    <app-detail *ngFor="let tel of user.telfs" [detail]="tel">
+    </app-detail>
+  
+  </div>
+</div>
