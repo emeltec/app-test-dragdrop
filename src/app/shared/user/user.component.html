@@ -1,5 +1,5 @@
 <div class="col-12 user">
-  {{user.name}}
+  {{user.name}} [ {{user.order}} ] - Type: {{user.type}}
   <div class="row telfs">
     <app-detail *ngFor="let tel of user.telfs" [detail]="tel">
     </app-detail>

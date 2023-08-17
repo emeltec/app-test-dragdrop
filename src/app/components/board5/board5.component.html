@@ -1,20 +1,19 @@
 <div class="container reports">
   <span>Nested Sorted simulated</span>
   <button (click)="initSortable()">Init sortable</button>
-  <button (click)="destroySortable()">Destroy sortable</button>
-  <button (click)="activeFilter()">Disable Drag & Drop</button>
-  <button (click)="removeFilter()">Enable Drag & Drop</button>
-  <button (click)="enableOrDisable()">{{labelButton}} sort</button>
+  <button (click)="presenter.destroySortable()">Destroy sortable</button>
+  <button (click)="presenter.activeFilter()">Disable Drag & Drop</button>
+  <button (click)="presenter.removeFilter()">Enable Drag & Drop</button>
+  <button (click)="presenter.enableOrDisable()">{{labelButton}} sort</button>
 
   <div class="row users">
-    <app-user *ngFor="let user of UsersData" [user]="user">
+    <app-user *ngFor="let user of users" [user]="user">
     </app-user>
   </div>
 </div>
 
 
-
-<div class="mt-3"></div>
+<!-- <div class="mt-3"></div>
 
 <div class="container reports3">
   <span>Nested Sorted</span>
@@ -26,4 +25,4 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
