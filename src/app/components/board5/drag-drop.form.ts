@@ -57,7 +57,8 @@ export class DragDropForm {
 
   reorderData(oldIndex: any, newIndex: any) {
     this.users = this.users$.getValue();
-    this.usersCopy = this.users.map(x => x);
+    // this.usersCopy = this.users.map(x => x);
+    this.usersCopy = JSON.parse(JSON.stringify(this.users));
 
     const draggUser = this.users[oldIndex];
     this.users.splice(oldIndex, 1);
@@ -69,7 +70,7 @@ export class DragDropForm {
     this.users.forEach((user: any, index: any) => {
       user.order = index + 1;
     });
-    console.log('Copy',this.usersCopy);
+    console.log('Old',this.usersCopy);
     console.log('New',this.users);
     this.verifyOrderCbx();
   }
@@ -78,7 +79,7 @@ export class DragDropForm {
     let isMoved = false;
     this.users.forEach((x,i) => {
       if(x.type == 'cbx' && !isMoved) {
-        if(x.order != this.usersCopy[i].order) {
+        if(x.type != this.usersCopy[i].type) {
           console.info('Tipo CBX fue movido')
           isMoved = true;
         }
